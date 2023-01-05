@@ -1,4 +1,5 @@
 import User from "../../../createUser/schemas/User";
+import authMiddleware from "../../../middleware/authMiddleware";
 import { BcryptProviderInterface } from "../../../provider/Bcrypt/BcryptProviderInterface";
 import { LoginUserDTO } from "../../useCases/LoginUserDTO";
 import { LoginUserRepository } from "../LoginUserRepository";
@@ -21,10 +22,9 @@ export class LoginUserRepositoryImplementation implements LoginUserRepository {
 
     async matchPassword(data: LoginUserDTO): Promise<void> {
         const findUser = await User.findOne({"email" : data.email}).exec()
-        this.bcrypt.comparePassword(data.password, findUser.password).then(function(result) {
-            if (result == false) {
-                throw new Error('Comparison of password with hash failed')
-            }
-        });
+        const comparePassword = await this.bcrypt.comparePassword(data.password, findUser.password)
+        if (comparePassword == false) {
+            throw new Error('Comparison of password with hash failed')
+        }
     }
 }
