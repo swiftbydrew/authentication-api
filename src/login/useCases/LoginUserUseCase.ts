@@ -6,6 +6,6 @@ export class LoginUserUseCase {
     constructor(private loginUserRepository: LoginUserRepository) {}
 
     async execute(data: LoginUserDTO): Promise<void> {
-        this.loginUserRepository.authentication(data);
+        await this.loginUserRepository.authentication(data);
     }
 }

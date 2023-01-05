@@ -8,9 +8,9 @@ export class LoginUserController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { email, password } = request.body;
         try {
-            const loginUser = await this.loginUserUseCase.execute({email, password})
+            await this.loginUserUseCase.execute({email, password})
             const jwt = await this.jwtProvider.jwtSign(email)
-            return response.status(201).json({"token": jwt})
+            return response.status(201).json({"jwt": jwt})
         }
         catch(error) {
             return response.status(400).json({"error": error.message})
