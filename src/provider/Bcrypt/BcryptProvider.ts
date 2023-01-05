@@ -7,4 +7,9 @@ export class BcryptProvider implements BcryptProviderInterface {
         const hash = bcrypt.hashSync(password, salt);
         return hash
     }
+
+    async comparePassword(password: string, hash: string): Promise<boolean> {
+        const compareResult = bcrypt.compare(password, hash)
+        return compareResult
+    }
 }

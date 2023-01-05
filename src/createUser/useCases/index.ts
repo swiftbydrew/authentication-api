@@ -1,11 +1,11 @@
 import { CreateUserUseCase } from "./CreateUserUseCase";
 import { CreateUserController } from "./CreateUserController";
-import { MongoDBUsersRepository } from "../repositories/implementation/MongoDBUsersRepository";
-import { BcryptProvider } from "../providers/Bcrypt/BcryptProvider";
+import { UserRepositoryImplementation } from "../repositories/implementation/UserRepositoryImplementation";
+import { BcryptProvider } from "../../provider/Bcrypt/BcryptProvider";
 
 const bcryptProvider = new BcryptProvider()
-const mongoDBUsersRepository = new MongoDBUsersRepository(bcryptProvider)
-const createUserUseCase = new CreateUserUseCase(mongoDBUsersRepository)
+const userRepositoryImplementation = new UserRepositoryImplementation(bcryptProvider)
+const createUserUseCase = new CreateUserUseCase(userRepositoryImplementation)
 const createUserController = new CreateUserController(createUserUseCase)
 
 export { createUserUseCase, createUserController }

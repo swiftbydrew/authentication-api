@@ -1,10 +1,10 @@
 import { UserEntity } from "../../entities/User";
-import { BcryptProviderInterface } from "../../providers/Bcrypt/BcryptProviderInterface";
+import { BcryptProviderInterface } from "../../../provider/Bcrypt/BcryptProviderInterface";
 import User from "../../schemas/User";
 import { CreateUserRequestDTO } from "../../useCases/CreateUserDTO";
 import { UsersRepository } from "../UsersRepository";
 
-export class MongoDBUsersRepository implements UsersRepository {
+export class UserRepositoryImplementation implements UsersRepository {
     constructor(private bcrypt: BcryptProviderInterface) {}
 
     async findByEmail(data: CreateUserRequestDTO) {
