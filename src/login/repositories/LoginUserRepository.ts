@@ -1,5 +1,6 @@
 import { LoginUserDTO } from "../useCases/LoginUserDTO";
 
 export interface LoginUserRepository {
-    authentication(data: LoginUserDTO): Promise<void>;
+    findByEmail(data: LoginUserDTO)
+    matchPassword(data: LoginUserDTO): Promise<void>;
 }

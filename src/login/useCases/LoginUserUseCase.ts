@@ -6,6 +6,10 @@ export class LoginUserUseCase {
     constructor(private loginUserRepository: LoginUserRepository) {}
 
     async execute(data: LoginUserDTO): Promise<void> {
-        await this.loginUserRepository.authentication(data);
+        const userAlreadyExists = await this.loginUserRepository.findByEmail(data);
+        if (userAlreadyExists == null) {
+            throw new Error('User not found in database');
+        }
+        const matchPassword = await this.loginUserRepository.matchPassword(data);
     }
 }
