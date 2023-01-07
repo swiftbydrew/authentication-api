@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createUserController } from "./createUser/useCases";
+import { forgotPasswordController } from "./forgotPassword/useCases";
 import { loginUserController } from "./login/useCases";
 import authMiddleware from "./middleware/authMiddleware";
 
@@ -14,7 +15,7 @@ router.post('/login', (request, response) => {
 });
 
 router.post('/forgot-password', authMiddleware, (request, response) => {
-    return loginUserController.handle(request, response);
+    return forgotPasswordController.handle(request, response);
 });
 
 export { router }
