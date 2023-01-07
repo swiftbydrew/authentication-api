@@ -10,7 +10,7 @@ export class LoginUserController {
         try {
             await this.loginUserUseCase.execute({email, password})
             const jwt = await this.jwtProvider.jwtSign(email)
-            return response.status(201).json({"jwt": jwt})
+            return response.status(200).json({"jwt": jwt})
         }
         catch(error) {
             return response.status(400).json({"error": error.message})

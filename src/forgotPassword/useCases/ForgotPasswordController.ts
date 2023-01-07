@@ -8,7 +8,7 @@ export class ForgotPasswordController {
         const { email } = request.body;
         try {
             await this.forgotPasswordUseCase.recoveryPassword({email})
-            return response.status(201).send()
+            return response.status(200).json({"success": "Send success e-mail."})
         }
         catch(error) {
             return response.status(400).json({"error": error.message})

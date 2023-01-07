@@ -1,5 +1,6 @@
 import { ForgotPasswordDTO } from "../useCases/ForgotPasswordDTO";
 
 export interface ForgotPasswordRepository {
-    recoveryPassword(data: ForgotPasswordDTO): Promise<void>;
+    findByEmail(data: ForgotPasswordDTO)
+    generatedToken(): number
 }
