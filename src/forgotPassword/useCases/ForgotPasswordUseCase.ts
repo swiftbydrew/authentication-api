@@ -1,3 +1,4 @@
+import User from "../../createUser/schemas/User";
 import { IMailProvider } from "../../provider/Mailtrap/IMailProvider";
 import { ForgotPasswordRepository } from "../repositories/ForgotPasswordRepository";
 import { ForgotPasswordDTO } from "./ForgotPasswordDTO";
@@ -11,7 +12,7 @@ export class ForgotPasswordUseCase {
             throw new Error('Error when trying to follow password recovery progress')
         }
 
-        const token = this.forgotPasswordRepository.generatedToken();
+        const token = await this.forgotPasswordRepository.updateToken(data)
 
         await this.mailProvider.sendMail({
             to: {
@@ -24,6 +25,6 @@ export class ForgotPasswordUseCase {
             },
             subject: 'Recuperação de senha.',
             body: `<p>Insira o token para recuperar sua senha. <b>${token}</b></p>`
-          })
+        })
     }
 }

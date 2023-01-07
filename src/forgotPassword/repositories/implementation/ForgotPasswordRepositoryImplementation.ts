@@ -8,8 +8,15 @@ export class ForgotPasswordRepositoryImplementation implements ForgotPasswordRep
         return findUser
     }
 
-    generatedToken(): number {
+    async updateToken(data: ForgotPasswordDTO): Promise<number> {
         const token = Math.floor(100000 + Math.random() * 900000)
+        User.updateOne(
+            { email: data.email }, 
+            { $set: { token: token }}, function(error, result) {
+                console.log(error)
+                console.log(result)
+            }
+        )
         return token
     }
 }

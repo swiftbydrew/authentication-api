@@ -4,7 +4,8 @@ const UserSchema = new Schema({
     email: String,
     fullname: String,
     birthday: String,
-    password: String
+    password: String,
+    token: Number
 })
 
 export default model('User', UserSchema)
