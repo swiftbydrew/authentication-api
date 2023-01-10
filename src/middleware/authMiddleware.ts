@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from 'jsonwebtoken'
+import dotenv from "dotenv";
+dotenv.config();
 
 interface TokenPayload {
     id: string;
@@ -14,9 +16,9 @@ export default function authMiddleware(req: Request, res: Response, next: NextFu
         return res.sendStatus(401);
     }
 
-    const token = authorization.replace('Bearer', '').trim();
+    const token = authorization.replace('Bearer', process.env.JWT_SIGN).trim();
     try {
-        const data = jwt.verify(token, 'secret')
+        const data = jwt.verify(token, process.env.JWT_SIGN)
         const { id } = data as TokenPayload;
 
         req.userId = id;
