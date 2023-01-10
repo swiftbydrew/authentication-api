@@ -20,7 +20,7 @@ export class ForgotPasswordUseCase {
               email: data.email,
             },
             from: {
-              name: 'Equipe do Meu App',
+              name: 'Administrador',
               email: 'noreply <swiftbydrew@outlook.com>',
             },
             subject: 'Recuperação de senha.',
