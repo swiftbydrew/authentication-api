@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { ForgotPasswordUseCase } from "./ForgotPasswordUseCase";
+import { TokenSendingUseCase } from "./TokenSendingUseCase";
 
-export class ForgotPasswordController {
-    constructor(private forgotPasswordUseCase: ForgotPasswordUseCase){}
+export class TokenSendingController {
+    constructor(private tokenSendingUseCase: TokenSendingUseCase){}
 
     async handle(request: Request, response: Response): Promise<Response> {
         const { email } = request.body;
         try {
-            await this.forgotPasswordUseCase.recoveryPassword({email})
+            await this.tokenSendingUseCase.recoveryPassword({email})
             return response.status(200).json({"success": "Send success e-mail."})
         }
         catch(error) {

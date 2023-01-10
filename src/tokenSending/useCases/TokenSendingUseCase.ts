@@ -1,18 +1,17 @@
-import User from "../../createUser/schemas/User";
 import { IMailProvider } from "../../provider/Mailtrap/IMailProvider";
-import { ForgotPasswordRepository } from "../repositories/ForgotPasswordRepository";
-import { ForgotPasswordDTO } from "./ForgotPasswordDTO";
+import { TokenSendingRepository } from "../repositories/TokenSendingRepository";
+import { TokenSendingDTO } from "./TokenSendingDTO";
 
-export class ForgotPasswordUseCase {
-    constructor(private forgotPasswordRepository: ForgotPasswordRepository, private mailProvider: IMailProvider) {}
+export class TokenSendingUseCase {
+    constructor(private tokenSendingRepository: TokenSendingRepository, private mailProvider: IMailProvider) {}
 
-    async recoveryPassword(data: ForgotPasswordDTO): Promise<void> {
-        const foundUserByEmail = await this.forgotPasswordRepository.findByEmail(data);
+    async recoveryPassword(data: TokenSendingDTO): Promise<void> {
+        const foundUserByEmail = await this.tokenSendingRepository.findByEmail(data);
         if (foundUserByEmail == null) {
             throw new Error('Error when trying to follow password recovery progress')
         }
 
-        const token = await this.forgotPasswordRepository.updateToken(data)
+        const token = await this.tokenSendingRepository.updateToken(data)
 
         await this.mailProvider.sendMail({
             to: {
