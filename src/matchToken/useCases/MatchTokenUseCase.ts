@@ -6,7 +6,7 @@ export class MatchTokenUseCase {
 
     async execute(data: MatchTokenDTO): Promise<void> {
         const isValidToken = await this.matchTokenRepository.findByToken(data)
-        if (isValidToken == null) {
+        if (isValidToken === null) {
             throw new Error('Token not found in database');
         }
     }
