@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { TokenSendingUseCase } from "./TokenSendingUseCase";
+import { NewPasswordUseCase } from "./NewPasswordUseCase";
 
-export class TokenSendingController {
-    constructor(private tokenSendingUseCase: TokenSendingUseCase){}
+export class NewPasswordController {
+    constructor(private newPasswordUseCase: NewPasswordUseCase){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { email } = request.body;
+        const { newPassword, hash } = request.body;
         try {
-            const hash = await this.tokenSendingUseCase.recoveryPassword({email})
+            await this.newPasswordUseCase.execute({newPassword, hash})
             return response.status(201).send()
         }
         catch(error) {

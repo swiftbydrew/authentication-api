@@ -4,6 +4,7 @@ import { tokenSendingController } from "./tokenSending/useCases";
 import { loginUserController } from "./login/useCases";
 import { matchTokenController } from "./matchToken/useCases";
 import authMiddleware from "./middleware/authMiddleware";
+import { newPasswordController } from "./newPassword/useCases";
 
 const router = Router()
 
@@ -21,6 +22,10 @@ router.post('/token-sending', authMiddleware, (request, response) => {
 
 router.post('/match-token', authMiddleware, (request, response) => {
     return matchTokenController.handle(request, response);
+});
+
+router.post('/new-password', authMiddleware, (request, response) => {
+    return newPasswordController.handle(request, response);
 });
 
 export { router }
