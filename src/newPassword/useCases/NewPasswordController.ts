@@ -5,9 +5,9 @@ export class NewPasswordController {
     constructor(private newPasswordUseCase: NewPasswordUseCase){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { newPassword, hash } = request.body;
+        const { newPassword, email } = request.body;
         try {
-            await this.newPasswordUseCase.execute({newPassword, hash})
+            await this.newPasswordUseCase.execute({newPassword, email})
             return response.status(201).send()
         }
         catch(error) {
