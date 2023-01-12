@@ -10,7 +10,7 @@ export class TokenSendingRepositoryImplementation implements TokenSendingReposit
 
     async updateToken(data: TokenSendingDTO): Promise<number> {
         const token = Math.floor(100000 + Math.random() * 900000)
-        User.updateOne(
+        await User.updateOne(
             { email: data.email }, 
             { $set: { token: token }}
         )
