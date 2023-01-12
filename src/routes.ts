@@ -16,7 +16,7 @@ router.post('/login', (request, response) => {
     return loginUserController.handle(request, response);
 });
 
-router.post('/token-sending', authMiddleware, (request, response) => {
+router.post('/token-sending', (request, response) => {
     return tokenSendingController.handle(request, response);
 });
 
